@@ -56,7 +56,7 @@ class INFO_PIB:
     
     def get_ranking(self,
                     df: pd.DataFrame,
-                    sector: str|list = "Total", 
+                    sector: str = "Total", 
                     year: int = 2022,
                     estado: str = "Aguascalientes"
                     ):
