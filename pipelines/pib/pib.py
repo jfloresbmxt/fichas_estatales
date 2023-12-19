@@ -39,7 +39,7 @@ class PIB:
 
     def gen_claves_nacional(self,indicador,actividad):
         
-        dic = pd.read_excel("diccionarios/diccionario_inegi.xlsx", 
+        dic = pd.read_excel("diccionarios/diccionario_inegi_v2.xlsx", 
                                      sheet_name="trimestral", 
                                      dtype={"clave":str, "sector": str}
                                      )
@@ -48,12 +48,13 @@ class PIB:
         claves =  self.__choice_actividad(claves, actividad)[["clave", "descripcion"]].set_index("clave")    
         
         claves =list(claves.to_records())
+        print(dic)
 
         return claves
     
     def gen_claves_estatal_sectorial(self, indicador, actividad, sector):
         
-        dic = pd.read_excel("diccionarios/diccionario_inegi.xlsx", 
+        dic = pd.read_excel("diccionarios/diccionario_inegi_v2.xlsx", 
                                      sheet_name="anual", 
                                      dtype={"clave":str, "sector": str}
                                      )
@@ -69,7 +70,7 @@ class PIB:
     
     def gen_claves_estatal(self, indicador, actividad, entidad):
         
-        dic = pd.read_excel("diccionarios/diccionario_inegi.xlsx", 
+        dic = pd.read_excel("diccionarios/diccionario_inegi_v2.xlsx", 
                                      sheet_name="anual", 
                                      dtype={"clave":str, "sector": str}
                                      )
