@@ -16,10 +16,10 @@ def get_catalogos():
     entidades = (pd.read_parquet("data/catalogos/estados/estados.parquet")
                  .sort_values(by="nom_agee")).nom_agee.apply(lambda x: x.capitalize())
     
-    pib_nom = pd.read_excel("data/pib/pib_nominal.xlsx",
+    pib_nom = pd.read_excel("data/pib/pib_nominalv2.xlsx",
                             dtype={"periodo":str}).set_index("periodo")
     
-    pib_real = pd.read_excel("data/pib/pib_real.xlsx",
+    pib_real = pd.read_excel("data/pib/pib_realv2.xlsx",
                             dtype={"periodo":str}).set_index("periodo")
     
     
