@@ -91,7 +91,7 @@ def seccion1(info, info2, info3, info4):
             with col7:
                 st.markdown(metrics(f"{format(valor, ',d')}", "mil millones MXN",f"{nac}% del nacional"), unsafe_allow_html=True)
             with col8:
-                st.markdown(metrics(f"{info2}%", "crec. 2021-2022",f"3.79% crec nacional"), unsafe_allow_html=True)
+                st.markdown(metrics(f"{info2}%", "crec. 2021-2022",f"3.94% crec nacional"), unsafe_allow_html=True)
 
         with col5:
             st.markdown("**PIB Manufacturero, 2022**")
