@@ -95,6 +95,7 @@ class INFO_PIB:
         df["% Actividades secundarias"] =  (df/total)*100
         df = df.reset_index()
         df.columns = ["Actividad","PIB 2022", "% Actividades secundarias"]
+        df = df.sort_values("PIB 2022", ascending=False)
 
         return df
     
@@ -110,6 +111,23 @@ class INFO_PIB:
         df["% manufacturas"] =  (df/total)*100
         df = df.reset_index()
         df.columns = ["Actividad","PIB 2022", "% de industria manufacturera"]
+        df = df.sort_values("PIB 2022", ascending=False)
+
+        return df
+    
+
+    def actividades_terciarias(self, 
+                               df: pd.DataFrame, 
+                               entidad: str = "Aguascalientes"):
+        df = df[df["entidad"] == entidad]
+        df = (df.iloc[-1:,26:-1]).T
+        total = df.loc["Total actividades terciarias"]
+
+        df["% actividades terciarias"] =  (df/total)*100
+        df = df.reset_index()
+        df.columns = ["Actividad","PIB 2022", "% Total actividades terciarias"]
+
+        df = df.sort_values("PIB 2022", ascending=False)
 
         return df
     

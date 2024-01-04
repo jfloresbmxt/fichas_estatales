@@ -50,14 +50,24 @@ hide_table_row_index = """
                     tbody th {display:none}
                     </>
                     """
-actividades_sec = info.actividades_secundarias(get_catalogos()[2], entidad)
-actividades_sec = info.table_style(actividades_sec)
 
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-st.table(actividades_sec)
+st.header("PIB Secundario")
+
+actividades_sec = info.actividades_secundarias(get_catalogos()[2], entidad)
+actividades_sec = info.table_style(actividades_sec)
 
 actividades_man = info.manufacturas(get_catalogos()[2], entidad)
 actividades_man = info.table_style(actividades_man)
 
-st.table(actividades_man)
+with st.expander("PIB Secundario"):
+    st.table(actividades_sec)
+    st.table(actividades_man)
+
+st.header("PIB Terciario")
+actividades_ter = info.actividades_terciarias(get_catalogos()[2], entidad)
+actividades_ter =  info.table_style(actividades_ter)
+
+with st.expander("PIB terciario"):
+    st.table(actividades_ter)
