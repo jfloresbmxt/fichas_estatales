@@ -82,3 +82,62 @@ class INFO_PIB:
         var = round(var.loc[estado][1], 2)
 
         return var
+    
+
+    def actividades_secundarias(self, 
+                                df: pd.DataFrame, 
+                                entidad: str = "Aguascalientes"):
+        df = df[df["entidad"] == entidad]
+        df = df[df["entidad"] == entidad]
+        df = (df.iloc[-1:,7:13]).T
+        total = df.loc["Total actividades secundarias"]
+
+        df["% Actividades secundarias"] =  (df/total)*100
+        df = df.reset_index()
+        df.columns = ["Actividad","PIB 2022", "% Actividades secundarias"]
+
+        return df
+    
+
+    def manufacturas(self,
+                     df: pd.DataFrame,
+                     entidad: str = "Aguascalientes"):
+        
+        df = df[df["entidad"] == entidad]
+        df = (df.iloc[-1:,13:26]).T
+        total = df.loc["Total industria manufacturera"]
+
+        df["% manufacturas"] =  (df/total)*100
+        df = df.reset_index()
+        df.columns = ["Actividad","PIB 2022", "% de industria manufacturera"]
+
+        return df
+    
+
+    def table_style(self,
+                    df:pd.DataFrame):
+
+        th_props = [
+        ('font-size', '16px'),
+        ('text-align', 'center'),
+        ('font-weight', 'bold'),
+        ('color', '#ffffff'),
+        ('background-color', '#B38E5D')
+        ]
+
+        td_props = [
+        ('font-size', '14px')
+        ]
+
+        styles = [
+        dict(selector="th", props=th_props),
+        dict(selector="td", props=td_props)
+        ]
+
+        # table
+        df = (df.style
+            .format(precision=2, thousands=",")
+            .set_properties(**{'text-align': 'left'})
+            .set_table_styles(styles))
+        
+        return df

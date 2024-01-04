@@ -42,3 +42,22 @@ data3 = info.get_ranking(get_catalogos()[1], sector="Total industria manufacture
 data4 = info.get_var(get_catalogos()[2], sector="Total industria manufacturera", estado=entidad)
 
 seccion1(data, data2, data3, data4)
+
+
+hide_table_row_index = """
+                    <style>
+                    thead tr th:first-child {display:none}
+                    tbody th {display:none}
+                    </>
+                    """
+actividades_sec = info.actividades_secundarias(get_catalogos()[2], entidad)
+actividades_sec = info.table_style(actividades_sec)
+
+st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
+st.table(actividades_sec)
+
+actividades_man = info.manufacturas(get_catalogos()[2], entidad)
+actividades_man = info.table_style(actividades_man)
+
+st.table(actividades_man)
