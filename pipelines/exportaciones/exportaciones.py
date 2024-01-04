@@ -113,3 +113,14 @@ class EXPORTACIONES:
               )
 
         return df
+    
+
+    def filter(self,
+               entidad = "Aguascalientes"):
+        
+        df = self._merge_scian()
+
+        df = self.__format_dates(df)
+
+        return df
+        

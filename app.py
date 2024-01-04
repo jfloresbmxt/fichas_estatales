@@ -55,10 +55,10 @@ st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 st.header("PIB Secundario")
 
-actividades_sec = info.actividades_secundarias(get_catalogos()[2], entidad)
+actividades_sec = info.actividades_secundarias(get_catalogos()[1], entidad)
 actividades_sec = info.table_style(actividades_sec)
 
-actividades_man = info.manufacturas(get_catalogos()[2], entidad)
+actividades_man = info.manufacturas(get_catalogos()[1], entidad)
 actividades_man = info.table_style(actividades_man)
 
 with st.expander("PIB Secundario"):
@@ -66,7 +66,7 @@ with st.expander("PIB Secundario"):
     st.table(actividades_man)
 
 st.header("PIB Terciario")
-actividades_ter = info.actividades_terciarias(get_catalogos()[2], entidad)
+actividades_ter = info.actividades_terciarias(get_catalogos()[1], entidad)
 actividades_ter =  info.table_style(actividades_ter)
 
 with st.expander("PIB terciario"):

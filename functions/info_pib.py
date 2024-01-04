@@ -154,7 +154,7 @@ class INFO_PIB:
 
         # table
         df = (df.style
-            .format(precision=2, thousands=",")
+            .format(precision=1, thousands=",")
             .set_properties(**{'text-align': 'left'})
             .set_table_styles(styles))
         
