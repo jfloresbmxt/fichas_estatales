@@ -98,20 +98,6 @@ class EXPORTACIONES:
             shutil.copyfileobj(response, out_file)
             with zipfile.ZipFile(file_name) as zf:
                 zf.extractall("data")
-
-    
-    def group_by_(self, by : list|str = ["entidad"]):
-        df = self._merge_scian()
-
-        df = self.__format_dates(df)
-
-        df = (df
-              .groupby(by)
-              .agg({"monto":"sum"})
-              .reset_index()
-              )
-
-        return df
     
 
     def filter(self):
