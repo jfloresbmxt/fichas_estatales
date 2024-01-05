@@ -4,6 +4,8 @@ from streamlit_extras.stylable_container import stylable_container
 from components.header import header, subheader
 from components.seccion1 import seccion1
 from functions.info_pib import INFO_PIB
+from functions.exportaciones import EXPORTACIONES
+
 
 st.set_page_config(
     page_title="Fichas estatales",
@@ -41,7 +43,14 @@ data2 = info.get_var(get_catalogos()[2], estado = entidad)
 data3 = info.get_ranking(get_catalogos()[1], sector="Total industria manufacturera", estado=entidad)
 data4 = info.get_var(get_catalogos()[2], sector="Total industria manufacturera", estado=entidad)
 
-seccion1(data, data2, data3, data4)
+
+exp = EXPORTACIONES()
+data5 = exp.gen_entidad(entidad)[3]
+data6 = exp.gen_entidad(entidad)[0]
+data7 = exp.gen_entidad(entidad)[1]
+data8 = exp.gen_entidad(entidad)[2]
+
+seccion1(data, data2, data3, data4, data5, data6, data7, data8)
 
 
 hide_table_row_index = """

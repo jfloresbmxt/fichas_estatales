@@ -123,4 +123,44 @@ class EXPORTACIONES:
         df = self.__format_dates(df)
 
         return df
+    
+
+    def _gen_nacional(self):
+        df = self._merge_scian()
+
+        df = self.__format_dates(df)
+
+        df = df[(df["year"]>"2020") & (df["year"]<"2023")]
+
+        df_montos = (df.groupby(["year"]).agg({"monto":"sum"}))
+
+        monto = df_montos.loc["2022", "monto"]
+        crecimiento = (df_montos.pct_change()*100).loc["2022", "monto"]
+
+        ranking = (df[df["year"] == "2022"]
+                .groupby("entidad").agg({"monto":"sum"})
+                .rank(ascending=False)
+                .sort_values("monto"))
+
+        return [monto, crecimiento, ranking]
+    
+
+    def gen_entidad(self, entidad: str = "Aguascalientes"):
+        monto_nacional = self._gen_nacional()[1]
+        ranking = self._gen_nacional()[2]
+        exp = self.filter()
+
+        df = exp[exp["entidad"] == entidad].reset_index()
+
+        df = df[(df["year"]>"2020") & (df["year"]<"2023")]
+        df = df.groupby(["year"]).agg({"monto":"sum"})
         
+        monto_estatal = round(df.loc["2022", "monto"],2)
+        porcentaje_estatal = round((monto_nacional/monto_estatal)*100, 1)
+
+        crecimiento = (df.groupby(["year"]).agg({"monto":"sum"})
+                    .pct_change()*100).loc["2022","monto"]
+        
+        r_estatal = ranking[ranking.index == entidad].loc[entidad, "monto"]
+
+        return [monto_estatal,porcentaje_estatal, crecimiento, r_estatal]

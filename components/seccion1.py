@@ -1,6 +1,6 @@
 import streamlit as st
-# from metrics import metrics
 from streamlit_extras.stylable_container import stylable_container
+from streamlit_extras.add_vertical_space import add_vertical_space
 
 def metrics(sline, i, iconname):
     fontsize = 16
@@ -59,7 +59,7 @@ def html(a,b,c):
     
     return htmlstr
 
-def seccion1(info, info2, info3, info4):
+def seccion1(info, info2, info3, info4, info5, info6, info7, info8):
     valor = info[0]
     rank = info[1]
     nac = info[2]
@@ -68,8 +68,7 @@ def seccion1(info, info2, info3, info4):
     rank_m = info3[1]
     nac_m = info3[2]
 
-
-    col1, col2, col3 = st.columns(3)
+    add_vertical_space()
     with stylable_container(
         key="container_with_border1",
         css_styles="""
@@ -85,20 +84,30 @@ def seccion1(info, info2, info3, info4):
         col4, col5 = st.columns(2)
         with col4:
             st.markdown("**Producto Interno Bruto, 2022**")
-            col6, col7, col8 = st.columns(3)
-            with col6:
-                st.markdown(metrics(f"{rank}°", "economía del país","1° lugar CDMX"), unsafe_allow_html=True)
-            with col7:
-                st.markdown(metrics(f"{format(valor, ',d')}", "mil millones MXN",f"{nac}% del nacional"), unsafe_allow_html=True)
+            col8, col9, col10 = st.columns(3)
             with col8:
+                st.markdown(metrics(f"{rank}°", "economía del país","1° lugar CDMX"), unsafe_allow_html=True)
+            with col9:
+                st.markdown(metrics(f"{format(valor, ',d')}", "mil millones MXN",f"{nac}% del nacional"), unsafe_allow_html=True)
+            with col10:
                 st.markdown(metrics(f"{info2}%", "crec. 2021-2022",f"3.94% crec nacional"), unsafe_allow_html=True)
 
-        with col5:
+            add_vertical_space()
             st.markdown("**PIB Manufacturero, 2022**")
-            col9, col10, col11 = st.columns(3)
-            with col9:
-                st.markdown(metrics(f"{rank_m}°", "economía del país","1° lugar Nuevo León"), unsafe_allow_html=True)
-            with col10:
-                st.markdown(metrics(f"{format(valor_m, ',d')}", "mil millones MXN",f"{nac_m}% del nacional"), unsafe_allow_html=True)
+            col11, col12, col13 = st.columns(3)
             with col11:
+                st.markdown(metrics(f"{rank_m}°", "economía del país","1° lugar Nuevo León"), unsafe_allow_html=True)
+            with col12:
+                st.markdown(metrics(f"{format(valor_m, ',d')}", "mil millones MXN",f"{nac_m}% del nacional"), unsafe_allow_html=True)
+            with col13:
                 st.markdown(metrics(f"{info4}%", "crec. 2021-2022",f"6.33% crec nacional"), unsafe_allow_html=True)
+        
+        with col5:
+            st.markdown("**Exportaciones, 2022**")
+            col14, col15, col16 = st.columns(3)
+            with col14:
+                st.markdown(metrics(f"{info5}°", "economía del país","1° lugar Chihuahua"), unsafe_allow_html=True)
+            with col15:
+                st.markdown(metrics(f"{format(info6, ',d')}", "millones USD",f"{info7}% del nacional"), unsafe_allow_html=True)
+            with col16:
+                st.markdown(metrics(f"{info8}%", "crec. 2021-2022",f"18.14% crec nacional"), unsafe_allow_html=True)
