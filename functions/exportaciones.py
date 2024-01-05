@@ -1,5 +1,4 @@
 import pandas as pd
-from janitor import clean_names
 import zipfile, urllib.request, shutil
 
 class EXPORTACIONES:
@@ -18,7 +17,7 @@ class EXPORTACIONES:
                          .rename(columns={"E03":"cve"})
                          )
     
-        df = clean_names(df)
+        df.columns = ["anio", "trimestre", "cve", "codigo_scian", "val_usd"]
         df["val_usd"] = df["val_usd"]/1000
 
         return df
@@ -64,7 +63,7 @@ class EXPORTACIONES:
         df = self.__read_data()
 
         entidades =  pd.read_csv("data/exportaciones/tc_entidad.csv", dtype = {"E03":str})
-        entidades = clean_names(entidades)
+        entidades.columns = ["e03", "nom_entidad"]
 
         df = (df
               .merge(entidades, left_on="cve", right_on="e03")
@@ -78,7 +77,7 @@ class EXPORTACIONES:
         df = self._merge_entidad()
 
         scian = pd.read_csv("data/exportaciones/tc_scian.csv", dtype={"CODIGO_SCIAN":str})
-        scian = clean_names(scian)
+        scian.columns = ["codigo_scian", "descripcion", "version"]
 
         df = (df
               .merge(scian)

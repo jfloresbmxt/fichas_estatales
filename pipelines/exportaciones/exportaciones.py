@@ -71,24 +71,24 @@ class EXPORTACIONES:
               .drop(columns={"e03"}))
         df.rename(columns = {"nom_entidad":"entidad"}, inplace=True)
 
-        return df
+        return entidades
     
 
     def _merge_scian(self):
         df = self._merge_entidad()
 
         scian = pd.read_csv("data/catalogos/tc_scian.csv", dtype={"CODIGO_SCIAN":str})
-        scian = clean_names(scian)
+        # scian = clean_names(scian)
 
-        df = (df
-              .merge(scian)
-              .drop(columns={"version"})
-              .rename(columns={"descripcion":"subsector",
-                               "val_usd":"monto"}
-                               )
-              )
+        # df = (df
+        #       .merge(scian)
+        #       .drop(columns={"version"})
+        #       .rename(columns={"descripcion":"subsector",
+        #                        "val_usd":"monto"}
+        #                        )
+        #       )
         
-        return df
+        return scian
 
         
     def donwload_data(self):
