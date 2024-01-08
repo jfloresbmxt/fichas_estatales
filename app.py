@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-from streamlit_extras.stylable_container import stylable_container
 from components.header import header, subheader
 from components.seccion1 import seccion1
+from streamlit_extras.metric_cards import style_metric_cards
 from functions.info_pib import INFO_PIB
 from functions.exportaciones import EXPORTACIONES
 
@@ -52,6 +52,15 @@ data8 = exp.gen_entidad(entidad)[2]
 
 seccion1(data, data2, data3, data4, data5, data6, data7, data8)
 
+def example():
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(label="Gain", value=5000, delta=1000)
+    col2.metric(label="Loss", value=5000, delta=-1000)
+    col3.metric(label="No Change", value=5000, delta=0)
+
+    style_metric_cards()
+
 
 hide_table_row_index = """
                     <style>
@@ -61,6 +70,12 @@ hide_table_row_index = """
                     """
 
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
+st.subheader("Participación")
+
+participacion = info.participación_sectores(get_catalogos()[1], entidad)
+participacion = info.table_style(participacion)
+st.table(participacion)
 
 st.header("PIB Secundario")
 

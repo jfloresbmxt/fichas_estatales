@@ -53,6 +53,26 @@ class INFO_PIB:
 
         return df_f
     
+
+    def participación_sectores(self, 
+                               df:pd.DataFrame, 
+                               entidad: str = "Aguascalientes", 
+                               year: int = 2022):
+        sectores = ["Total actividades primarias",
+                    "Total actividades secundarias",
+                    "Total actividades terciarias"
+                    ""]
+
+        temp = (df[(df["entidad"] == entidad)]
+                .loc[[str(year)]]
+                .drop(columns = {"entidad"})).T
+        
+        total = temp.loc["Total"]
+        temp["%"] = (temp/total)*100
+        temp = temp.loc[sectores]
+        temp = temp.reset_index().rename(columns={"index":"Actividad"})
+
+        return temp
     
     def get_ranking(self,
                     df: pd.DataFrame,
